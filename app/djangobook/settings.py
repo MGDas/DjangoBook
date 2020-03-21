@@ -18,6 +18,7 @@ INSTALLED_APPS = [
 
     # myapps
     'shop',
+    'scrap',
 ]
 
 MIDDLEWARE = [

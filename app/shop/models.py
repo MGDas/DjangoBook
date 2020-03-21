@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 from shop.utils import get_image
 
@@ -11,19 +12,26 @@ class BaseModel(models.Model):
         return self.name
 
 
-class Author(BaseModel):
+class ImgUrl(models.Model):
+
+    img_url = models.URLField(blank=True, null=True)
+    class Meta:
+        abstract = True
+
+
+class Author(BaseModel, ImgUrl):
     name = models.CharField(max_length=500, db_index=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to=get_image, blank=True, null=True)
 
 
-class Genre(BaseModel):
+class Genre(BaseModel, ImgUrl):
     name = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, unique=True)
     image = models.ImageField(upload_to=get_image, blank=True, null=True)
 
 
-class Book(BaseModel):
+class Book(BaseModel, ImgUrl):
     name = models.CharField(max_length=500, db_index=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to=get_image, blank=True, null=True)

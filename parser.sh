@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python app/scraper/parser.py
+python app/manage.py parser 
