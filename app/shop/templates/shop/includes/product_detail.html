@@ -1,0 +1,56 @@
+{% load static %}
+
+<div class="left-ads-display col-lg-8">
+    <div class="row">
+        <div class="desc1-left col-md-6">
+            {% if book.image %}
+              <img src="{{ book.image.url }}" class="img-fluid" alt="{{ book.name }}">
+            {% elif book.img_url %}
+              <img src="{{ book.img_url }}" class="img-fluid" alt="{{ book.name }}">
+            {% else %}
+              <img src="{% static 'NoFoto.webp' %}" class="img-fluid" alt="{{ book.name }}">
+            {% endif %}
+        </div>
+        <div class="desc1-right col-md-6 pl-lg-4">
+            <h3 class="editContent">
+                {{ book.name }}
+            </h3>
+            <h5 class="editContent"></h5>
+            <ul>
+                <li style="list-style: none"><span><b>Автор:</b>
+                    {% for actor in book.author.all %}
+                        {{ actor.name }}
+                    {% endfor %}
+                </span>
+                </li>
+                <li style="list-style: none"><span><b>Жанр:</b>
+                    {{ book.genre.name }}
+                    </span>
+                </li>
+                <li style="list-style: none">
+                    <a href="#"><b>Рейтинг:</b>
+                        <span class="fa fa-star" aria-hidden="true"></span>
+                        <span class="fa fa-star" aria-hidden="true"></span>
+                        <span class="fa fa-star" aria-hidden="true"></span>
+                        <span class="fa fa-star" aria-hidden="true"></span>
+                        <span class="fa fa-star" aria-hidden="true"></span>
+                        <span class="editContent">5.0</span>
+                    </a>
+                </li>
+                {% include 'shop/includes/details/share.html' %}
+            </ul>
+        </div>
+    </div>
+    <div class="row sub-para-w3layouts mt-5">
+
+        <h3 class="shop-sing editContent">
+            О книге {{ book.name }}
+        </h3>
+        <p class="editContent">
+            {{ book.description }}
+        </p>
+
+    </div>
+    <hr>
+    {% include 'shop/includes/details/rewiew.html' %}
+</div>

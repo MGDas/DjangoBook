@@ -45,3 +45,27 @@ class Book(BaseModel, ImgUrl):
         blank=True,
         null=True,
     )
+
+    def get_rewiew(self):
+        return self.rewiews.filter(parent__isnull=True)
+
+
+class Rewiew(BaseModel):
+    name = models.CharField(max_length=250, db_index=True)
+    email = models.EmailField()
+    comment = models.TextField()
+    image = models.ImageField(upload_to=get_image, blank=True, null=True)
+
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        related_name='rewiews'
+    )
+
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        related_name='childs',
+        blank=True,
+        null=True
+    )

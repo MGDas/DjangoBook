@@ -82,6 +82,8 @@ def get_author(param):
     if author_name:
         try:
             author_url = param.select_one(".item-tab__chars-value a")['href']
+        except KeyError:
+            author_url = param.select_one(".item-tab__chars-value a")['data-link']
         except:
             author_url = None
 
